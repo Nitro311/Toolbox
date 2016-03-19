@@ -21,5 +21,6 @@ final class Points {
 		return slope;
 		
 	}
-
+	
+	public static final Point Origin = new Point(0,0);
 }
