@@ -1,7 +1,9 @@
 package Geometry;
 
 /**
- * Hi it's me
+ * Used to define a point in space
+ * @author Alex Dutton
+ * 
  */
 public class Point {
 	final double X;
@@ -16,4 +18,5 @@ public class Point {
 		
 	}
 	
+	public static final Point Origin = new Point(0,0);
 }
