@@ -17,6 +17,4 @@ public class Point {
 		return "("+ X + "," + Y + ")";
 		
 	}
-	
-	public static final Point Origin = new Point(0,0);
 }
