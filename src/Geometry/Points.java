@@ -12,8 +12,6 @@ final class Points {
 		double xDistance = a.X - b.X;
 		double yDistance = a.Y - b.Y;
 		double hypotenuse = Math.sqrt(xDistance*xDistance + yDistance*yDistance);
-		System.out.println(xDistance);
-		System.out.println(yDistance);
 		return hypotenuse;
 	}
 	public static double slope(Point a, Point b){
