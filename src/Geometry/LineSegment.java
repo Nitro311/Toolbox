@@ -1,21 +1,18 @@
 package Geometry;
 /**
- * a line segment is a part of a 
- * line that is bounded by two distinct 
- * end points, and contains every point 
- * on the line between its endpoints. 
- * A closed line segment includes both 
- * endpoints, while an open line segment 
- * excludes both endpoints; a half-open 
- * line segment includes exactly one of 
- * the endpoints.
+ *
  * @author Alex Dutton
  *
  */
 public class LineSegment {
 	public final Point Start;
 	public final Point End;
-	
+	/**
+	 * creates a LineSegement using two points as the start and the end
+	 * @param start Point
+	 * @param end Point
+	 * @throws Exception if the start and end Points are the same
+	 */
 	public LineSegment(Point start, Point end) throws Exception
 	{
 		if (start.equals(end))
@@ -23,7 +20,18 @@ public class LineSegment {
 		Start = start;
 		End = end;
 	}
-	
+	/**
+	 * creates a LineSegment using 4 integers used to create 2 Points as the start and end of the segment 
+	 * @param x
+	 * @param y
+	 * @param x2
+	 * @param y2
+	 * @throws Exception
+	 */
+	public LineSegment(double x, double y, double x2, double y2) throws Exception
+	{
+		this(new Point (x,y), new Point (x2,y2));
+	}
 	public Point midpoint(){
 		return new Point((Start.X+End.X)/2, (Start.Y+End.Y)/2);
 	}
@@ -66,5 +74,18 @@ public class LineSegment {
 	}
 	public String toString (){
 		return "Line Segment [Start: "+Start+", End: "+End+"]";
+	}
+	public LineSegment divide (double a) throws Exception{
+		return new LineSegment((Start.X/a),(Start.Y/a),(End.X/a),(End.Y / a));
+	}
+	public LineSegment subtract (LineSegment a) throws Exception{
+		return new LineSegment((Start.X-a.Start.X),(Start.Y-a.Start.Y),(End.X- a.End.X),(End.Y - a.End.Y));
+	}
+	public LineSegment multiply (double a) throws Exception{
+		return new LineSegment((Start.X*a),(Start.Y*a),(End.X* a),(End.Y * a));
+	}
+	public LineSegment add (LineSegment a) throws Exception{
+		return new LineSegment((Start.X),(Start.Y),(End.X+ a.End.X - a.Start.X),(End.Y + a.End.Y- a.Start.Y));
+		
 	}
 }

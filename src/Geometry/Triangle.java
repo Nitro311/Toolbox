@@ -7,20 +7,28 @@ package Geometry;
  * @author Alex Dutton
  *
  */
-public class Triangle {
-	public Point A;
-	public Point B;
-	public Point C;
-	public double AB;
-	public double BC;
-	public double CA;
-	public double AngleA;
-	public double AngleB;
-	public double AngleC;
-	public LineSegment Hypotenuse;
-	public double Base;
-	public double Height;
+public class Triangle extends Polygon{
+	public final Point A;
+	public final Point B;
+	public final Point C;
+	public final double AB;
+	public final double BC;
+	public final double CA;
+	public final double AngleA;
+	public final double AngleB;
+	public final double AngleC;
+	public final LineSegment Hypotenuse;
+	public final double Base;
+	public final double Height;
+	/**
+	 * creates a Triangle using 3 points as the tip, right, and left corner of the triangle
+	 * @param a Point
+	 * @param b Point
+	 * @param c Point
+	 * @throws Exception if any of the Points are equal
+	 */
 	public Triangle (Point a, Point b, Point c) throws Exception{
+		super(new Point[] {a,b,c});
 		if (a.equals(b)||a.equals(c)||b.equals(c))
 			throw new Exception ("Not a Valid Triangle!");
 		A=a;
@@ -49,20 +57,20 @@ public class Triangle {
 			Height = new Line(Hypotenuse).distanceToPoint(A);
 		}
 	}
+	/**
+	 * creates a Triangle using 6 integers which are used as the x and ys of the Points of the tip,left and right corners of the Triangle
+	 * @param x
+	 * @param y
+	 * @param x2
+	 * @param y2
+	 * @param x3
+	 * @param y3
+	 * @throws Exception if any of the Points are equal
+	 */
 	public Triangle (double x,double y,double x2,double y2,double x3,double y3) throws Exception{
 		this(new Point(x,y) , new Point (x2,y2), new Point (x3,y3));
 	}
 	public String toString (){
 		return "Triangle [A: "+A+", B: "+B+", C: "+C+", Side-AB: "+AB+", Side-BC: "+BC+", Side-CA: "+CA+", Angle-A: "+AngleA+", Angle-B: "+AngleB+", Angle-C: "+AngleC+"]";
-	}
-	public double area(){
-		double semi = (AB+BC+CA) /2;
-		
-		return Math.sqrt(semi*(semi-AB)*(semi - BC)*(semi-CA));
-		
-	}
-	public double perimeter(){
-		return AB+CA+BC;
-		
 	}
 }

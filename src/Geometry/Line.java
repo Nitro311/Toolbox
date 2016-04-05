@@ -10,6 +10,12 @@ public class Line {
 	public final double Slope;
 	public final double YIntercept;
 	public final double XIntercept;
+	/**
+	 * creates a Line using the slope of the Line and the Y-Intercept
+	 * @param slope
+	 * @param yIntercept
+	 * @throws Exception if the slope or Y-Intercept aren't a number
+	 */
 	public Line(double slope, double yIntercept) throws Exception{
 		if (Double.isNaN(slope))
 			throw new Exception ("slope is undefined");
@@ -24,7 +30,10 @@ public class Line {
 			XIntercept = (-1*YIntercept) / Slope;
 		}
 	}
-	
+	/**
+	 * creates a Line using a LineSegments slope  and projected Y-Intercept
+	 * @param LineSegment
+	 */
 	public Line(LineSegment a){
 		Slope = a.slope();
 		if (Double.isNaN(Slope)){
@@ -42,14 +51,46 @@ public class Line {
 		}
 		
 	}
+	/**
+	 * creates a Line using a LineSegment based on 2 Points
+	 * @param Point1
+	 * @param Point2
+	 */
 	public Line (Point a, Point b) throws Exception{
 		this(new LineSegment (a,b));
 	}
+	/**
+	 * creates a Line using 4 integers to create Points used to make a LineSegment
+	 * @param x
+	 * @param y
+	 * @param x2
+	 * @param y2
+	 * @throws Exception
+	 */
 	public Line (double x,double y,double x2,double y2) throws Exception{
 		this(new Point (x,y), new Point (x2,y2));
 	}
+	public String toStandardForm(){
+		
+		return (Slope*-1)+"x+y ="+YIntercept;
+		
+	}
 	public String toString(){
-		return "Line[Slope "+Slope+", Y-Intercept "+YIntercept+", X-Intercept "+XIntercept+"]";
+		String equation = "";
+		if (!(Double.isNaN(Slope))){
+			if (YIntercept != 0 && Slope !=0) {
+				equation = "y=" + Slope+"x + " + YIntercept;
+			} else if (YIntercept != 0 && Slope ==0) {
+				equation = "y=" + YIntercept;
+			} else if (YIntercept == 0 && Slope !=0) {
+				equation = "y=" + Slope+"x";
+			} else {
+				equation = "y=0";
+			}
+		}else{
+			equation = "x="+XIntercept;
+		}
+		return "Line[Slope "+Slope+", Y-Intercept "+YIntercept+", X-Intercept "+XIntercept+", y=mx+b format:"+equation+"]";
 	}
 	public boolean contains(Point p){
 		if (Double.isNaN(Slope)){
@@ -103,10 +144,15 @@ public class Line {
 		}
 	}
 	public boolean isIntercept (Line a){
-			return Slope != a.Slope || (Double.isNaN(Slope) && Double.isNaN(a.Slope));
+			return !isParallel(a);
 	}
 	public boolean isParallel	(Line a){
-		return !(Slope != a.Slope || (Double.isNaN(Slope) && Double.isNaN(a.Slope)));
+		return Slope == a.Slope || (Double.isNaN(Slope) && Double.isNaN(a.Slope));
+	}
+	public boolean isPerpendicular(Line a){
+		return (Double.isNaN(Slope)&& a.Slope == 0)
+				|| Double.isNaN(a.Slope)&& Slope == 0
+				|| -1/Slope == a.Slope ;
 	}
 	public double distanceToPoint(Point p) throws Exception{
 		if (Double.isNaN(Slope))

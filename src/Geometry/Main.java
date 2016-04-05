@@ -18,11 +18,15 @@ public class Main {
 		System.out.println(new Line(0,0,0,1));
 		System.out.println(new Line(0,0,1,1).intercept(new Line (5,0,5,1)));
 		System.out.println(new Line(5,0,5,1).intercept(new Line (0,0,1,1)));
+		System.out.println(new Line(0,0,1,0));
+		System.out.println(new Line(2,2,3,4).toStandardForm());
 		System.out.println(Rectangle.fromTRBL(3, 5, 0, 0));
 		//System.out.println(new Triangle(0,0,0,0,0,0).Height);
 		//System.out.println(new Line(1,0).distanceToPoint(new Point(5,-5)));
 		System.out.println(new Line(0,0,0,5).distanceToPoint(new Point(5,-5)));
-		
+		System.out.println(new Circle (5));
+		System.out.println(new Triangle (0,0,4,3,4,0));
+		System.out.println(new Polygon (new Point[] {new Point(0,0),new Point(4,3),new Point(4,0)}));
 	}
 	
 	public static void RectangleTests() throws Exception {

@@ -8,7 +8,11 @@ package Geometry;
 public class Point {
 	final double X;
 	final double Y;
-	
+	/**
+	 * creates a Point using 2 integers as the X and Y
+	 * @param x
+	 * @param y
+	 */
 	public Point(double x, double y) {
 		X = x;
 		Y=y;

@@ -4,12 +4,49 @@ package Geometry;
  * @author Alex Dutton
  *
  */
-public class Rectangle extends Shape2D {
+public class Rectangle extends Polygon {
 	public final Point LowerLeft;
 	public final Point UpperRight;
 	public final double Height;
 	public final double Width;
+	/**
+	 * creates a Rectangle using 4 integers as x and ys for 2 Points; the upper left and low left corners of the Rectangle
+	 * @param x1
+	 * @param y1
+	 * @param x2
+	 * @param y2
+	 * @throws Exception if Xs or Ys can't be equal
+	 */
 	public Rectangle (double x1, double y1 , double x2, double y2) throws Exception{
+		super(PointsFromCoords(x1, y1, x2, y2));
+
+		Name = "Rectangle";
+		LowerLeft = Verticies[0];
+		UpperRight = Verticies[2];
+		Height = UpperRight.Y - LowerLeft.Y;
+		Width = UpperRight.X - LowerLeft.X;
+	}
+	/**
+	 * creates a Rectangle using the Points as the upper left and low left corners of the Rectangle
+	 * @param a
+	 * @param b
+	 * @throws Exception if Xs or Ys can't be equal
+	 */
+	public Rectangle (Point a, Point b) throws Exception {
+		this(a.X, a.Y, b.X, b.Y);
+	}
+	/**
+	 * creates a Rectangle using a LineSegments start and end Points as the the upper left and low left corners of the Rectangle 
+	 * @param LineSegment
+	 * @throws Exception if Xs or Ys can't be equal
+	 */
+	public Rectangle (LineSegment a) throws Exception {
+		this(a.Start, a.End);
+	}
+	public static Rectangle fromTRBL(double top,double right,double bottom,double left) throws Exception{
+		return new Rectangle (left,top,right,bottom);
+	}
+	private static Point[] PointsFromCoords(double x1, double y1 , double x2, double y2) throws Exception {
 		if (y2 == y1){
 			throw new Exception("Y's are equal");
 		}
@@ -20,32 +57,16 @@ public class Rectangle extends Shape2D {
 		double LowestY = Math.min(y1, y2);
 		double LeftestX = Math.min(x1, x2);
 		double RightestX = Math.max(x1, x2);
-		this.LowerLeft = new Point (LeftestX, LowestY);
-		this.UpperRight = new Point (RightestX, HighestY);
-		this.Height = HighestY - LowestY;
-		this.Width = RightestX - LeftestX;
-	}
-	public Rectangle (Point a, Point b) throws Exception
-	{
-		this(a.X, a.Y, b.X, b.Y);
-	}
-	public Rectangle (LineSegment a) throws Exception
-	{
-		this(a.Start, a.End);
-	}
-	public static Rectangle fromTRBL(double top,double right,double bottom,double left) throws Exception{
-		return new Rectangle (left,top,right,bottom);
-	}
-	public double area (){
-		return Height*Width;
-		
+		return new Point[] {
+			new Point (LeftestX, LowestY),
+			new Point (LeftestX, HighestY),
+			new Point (RightestX, HighestY),
+			new Point (RightestX, LowestY)
+		};
 	}
 	public double diagonalDistance (){
 		return Math.sqrt(MathX.square(Height)+MathX.square(Width));
 		
-	}
-	public double perimeter(){
-		return Height * 2 + Width * 2;
 	}
 	public boolean isSquare (){
 		if (Width == Height){
@@ -58,23 +79,6 @@ public class Rectangle extends Shape2D {
 	
 	public Point center() {
 		return new Point((UpperRight.X - LowerLeft.X) / 2.0 + LowerLeft.X, (UpperRight.Y - LowerLeft.Y) / 2.0 + LowerLeft.Y);
-	}
-	
-	public String toString(){
-		return "Rectangle[" + this.LowerLeft + " " + this.UpperRight + "]";
-		
-	}
-	public boolean equals(Object obj){
-		if (!(obj instanceof Rectangle))
-			return false;
-		if (this == obj)
-			return true;
-		
-		Rectangle other = (Rectangle) obj;
-		if (other == null)
-			return false;
-		
-		return this.Width == other.Width && this.Height == other.Height;
 	}
 }
 
