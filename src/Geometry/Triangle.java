@@ -20,6 +20,10 @@ public class Triangle extends Polygon{
 	public final LineSegment Hypotenuse;
 	public final double Base;
 	public final double Height;
+	public final double IncenterX;
+	public final double IncenterY;
+	public final double Perimeter;
+	public Point Incenter;
 	/**
 	 * creates a Triangle using 3 points as the tip, right, and left corner of the triangle
 	 * @param a Point
@@ -56,6 +60,10 @@ public class Triangle extends Polygon{
 			Hypotenuse = new LineSegment(B,C);
 			Height = new Line(Hypotenuse).distanceToPoint(A);
 		}
+		Perimeter = AB+CA+BC;
+		IncenterX = (BC * A.X +  CA * B.X + AB * C.X)/Perimeter;
+		IncenterY = (BC * A.Y + CA * B.Y + AB * C.Y)/Perimeter;
+		Incenter = new Point(IncenterX,IncenterY);
 	}
 	/**
 	 * creates a Triangle using 6 integers which are used as the x and ys of the Points of the tip,left and right corners of the Triangle
@@ -71,6 +79,6 @@ public class Triangle extends Polygon{
 		this(new Point(x,y) , new Point (x2,y2), new Point (x3,y3));
 	}
 	public String toString (){
-		return "Triangle [A: "+A+", B: "+B+", C: "+C+", Side-AB: "+AB+", Side-BC: "+BC+", Side-CA: "+CA+", Angle-A: "+AngleA+", Angle-B: "+AngleB+", Angle-C: "+AngleC+"]";
+		return "Triangle [A: "+A+", B: "+B+", C: "+C+", Side-AB: "+AB+", Side-BC: "+BC+", Side-CA: "+CA+", Angle-A: "+AngleA+", Angle-B: "+AngleB+", Angle-C: "+AngleC+", Incenter:"+Incenter+"]";
 	}
 }

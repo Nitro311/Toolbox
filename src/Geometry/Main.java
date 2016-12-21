@@ -4,29 +4,7 @@ import java.io.IOException;
 import Challenges.Array;
 public class Main {
 	public static void main(String[] args) throws Exception {
-		int[] data = new int[] { 10, 20, 30, 40, 50, 60, 70, 80, 90 };
-		System.out.println(new Rectangle(0,10,20,20).center());
-		//System.out.println(MathX.leapyear(100));
-		RectangleTests();
-		Line l = new Line(new LineSegment(new Point(0, 5),new Point(0,10)));
-		System.out.println(l);
-		System.out.println(l.contains(new Point (0,5)));
-		//new LineSegment(new Point(0,0),new Point(0,0));
-		System.out.println(new Circle(new LineSegment(new Point(0,0),new Point(5,0))).perimeter());
-		System.out.println(new Circle(5).equals(new Circle (2)));
-		System.out.println(new Line(0,0,1,1));
-		System.out.println(new Line(0,0,0,1));
-		System.out.println(new Line(0,0,1,1).intercept(new Line (5,0,5,1)));
-		System.out.println(new Line(5,0,5,1).intercept(new Line (0,0,1,1)));
-		System.out.println(new Line(0,0,1,0));
-		System.out.println(new Line(2,2,3,4).toStandardForm());
-		System.out.println(Rectangle.fromTRBL(3, 5, 0, 0));
-		//System.out.println(new Triangle(0,0,0,0,0,0).Height);
-		//System.out.println(new Line(1,0).distanceToPoint(new Point(5,-5)));
-		System.out.println(new Line(0,0,0,5).distanceToPoint(new Point(5,-5)));
-		System.out.println(new Circle (5));
-		System.out.println(new Triangle (0,0,4,3,4,0));
-		System.out.println(new Polygon (new Point[] {new Point(0,0),new Point(4,3),new Point(4,0)}));
+		System.out.println(new Triangle(2,3,4,5,6,7));
 	}
 	
 	public static void RectangleTests() throws Exception {

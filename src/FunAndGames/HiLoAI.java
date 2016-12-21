@@ -14,6 +14,7 @@ import java.util.Scanner;
  */
 public final class HiLoAI {
 	public static void main(String[] args) throws Exception {
+		int objective = 20;
 		int numberofgames = 0;
 		Random rand = new Random();
 		int randomNumber = rand.nextInt(10)+1;
@@ -25,7 +26,7 @@ public final class HiLoAI {
 		boolean StillPlaying = true;
 		while (StillPlaying){
 			int lastNumber = randomNumber;
-			boolean isHigher = askHiLo(randomNumber, "The number is "+randomNumber +" is the next number higher or lower?");
+			boolean isHigher = askHiLo(randomNumber);
 			while (randomNumber == lastNumber || numbers.contains(randomNumber)){
 				randomNumber = rand.nextInt(10)+1;
 			}
@@ -33,28 +34,22 @@ public final class HiLoAI {
 			numbers.add(randomNumber);
 			if (numbers.size()>5)
 				numbers.remove(0);
-			System.out.println("DEBUG: Numbers "+ numbers.toString());
-			System.out.println("The last number was "+ lastNumber);
-			System.out.println("The new number is "+ randomNumber);
 			if ((randomNumber > lastNumber && isHigher) || (randomNumber < lastNumber && !isHigher)){
 				score ++;
-				System.out.println("Congratz you guessed correctly your score is now "+ score);
 				
 			}else{
-				System.out.println("Game Over! your score was "+ score);
 				if (score>highScore){
-					if(highScore != UNSET) {
+
+					if(highScore>objective){//highScore != UNSET || ) {
 						System.out.println("Games played:" + numberofgames);
 						System.out.println("you beat the old highscore "+ highScore);
+						
 					}
 					highScore = score;
-				}else{
-					
-					System.out.println("the highscore is "+ highScore);
-					System.out.println("Games played:" + numberofgames);
+				}else{;
 				}
-				if (highScore > 50) {
-					StillPlaying = askYesNo("Do you want to play again?");
+				if (highScore > objective) {
+					StillPlaying = askYesNo("Continue?");
 				}
 				numberofgames ++;
 				numbers = new ArrayList<Integer>();
@@ -84,10 +79,9 @@ public final class HiLoAI {
 	}
 	
 	static List<Integer> memory = new ArrayList<Integer>();
-	private static boolean askHiLo(int randomNumber, String message) {
+	private static boolean askHiLo(int randomNumber) {
 		int countBelow = 0;
 		int countAbove = 0;
-		System.out.println(message);
 		memory.add(randomNumber);
 		if (memory.size()>5)
 			memory.remove(0);
@@ -101,12 +95,6 @@ public final class HiLoAI {
 			}
 		}
 		boolean guessHigh = countAbove >= countBelow;
-		
-		if (guessHigh) {
-			System.out.println("higher");
-		} else{
-			System.out.println("lower");
-		}
 		return guessHigh;		
 	}
 	private static int askInt(String message) {
